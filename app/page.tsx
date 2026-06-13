@@ -50,6 +50,57 @@ const personalProjects = [
   },
 ];
 
+const experienceHighlights = [
+  {
+    company: "Capital One",
+    role: "Technical Lead / Architect",
+    years: "2021-2025",
+    focus:
+      "Led speech analytics, NLP pipelines, and MLOps work for card contact-center operations.",
+    areas: ["NLP", "MLOps", "Streaming", "Architecture"],
+  },
+  {
+    company: "Expedia Group",
+    role: "Senior Software Engineer",
+    years: "2019-2020",
+    focus:
+      "Built conversation routing and enrichment services for Expedia's virtual agent platform.",
+    areas: ["Kafka", "Virtual agents", "Backend services"],
+  },
+  {
+    company: "Microsoft Azure Blockchain",
+    role: "Senior Software Engineer",
+    years: "2017-2019",
+    focus:
+      "Built provisioning and operations automation for enterprise Ethereum consortium networks on Azure.",
+    areas: ["Azure", "Blockchain", "Automation"],
+  },
+  {
+    company: "SAP Concur",
+    role: "Senior Software Engineer",
+    years: "2014-2017",
+    focus:
+      "Helped drive monolith-to-microservices migration and built Kafka platform capabilities.",
+    areas: ["Kafka", "Microservices", "Platform engineering"],
+  },
+  {
+    company: "Microsoft Advertising",
+    role: "Software Design Engineer",
+    years: "2009-2013",
+    focus:
+      "Shipped desktop features and sync workflows for Microsoft Advertising Editor, formerly Bing Ads Editor.",
+    areas: ["Desktop apps", "Sync", "Product engineering"],
+  },
+  {
+    company: "Addis Ababa, Ethiopia",
+    role: "Software Engineer / Support Engineer",
+    years: "2002-2007",
+    focus:
+      "Built government finance and court systems with Java/J2EE, Struts, WebSphere, VB.NET, and SQL Server.",
+    areas: ["Java/J2EE", "Government systems", "SQL Server"],
+  },
+];
+
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -245,11 +296,63 @@ Try one of the starter questions below or ask directly.`,
                 ))}
               </div>
 
+              <section aria-labelledby="experience-highlights" className="space-y-3">
+                <div>
+                  <h2
+                    id="experience-highlights"
+                    className="text-sm font-semibold uppercase text-slate-500 dark:text-slate-400"
+                  >
+                    Experience
+                  </h2>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    A concise view of the roles and systems behind the resume context.
+                  </p>
+                </div>
+
+                <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+                  {experienceHighlights.map((experience, index) => (
+                    <article
+                      key={`${experience.company}-${experience.years}`}
+                      className={`grid gap-3 p-4 sm:grid-cols-[8rem_1fr] ${
+                        index === 0 ? "" : "border-t border-slate-200 dark:border-slate-700"
+                      }`}
+                    >
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                          {experience.years}
+                        </p>
+                        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                          {experience.company}
+                        </p>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
+                          {experience.role}
+                        </h3>
+                        <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                          {experience.focus}
+                        </p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {experience.areas.map((area) => (
+                            <span
+                              key={area}
+                              className="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                            >
+                              {area}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
               <section aria-labelledby="personal-projects" className="space-y-3">
                 <div>
                   <h2
                     id="personal-projects"
-                    className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+                    className="text-sm font-semibold uppercase text-slate-500 dark:text-slate-400"
                   >
                     Personal projects
                   </h2>
