@@ -33,14 +33,6 @@ const personalProjects = [
     question: "How does AlgoLens demonstrate product and frontend thinking?",
   },
   {
-    name: "Interactive Profile",
-    href: "https://github.com/estifanosk/interactive-profile",
-    summary:
-      "This AI-backed career profile, built as a practical experiment in grounded resume Q&A, content retrieval, and deployment.",
-    tags: ["Next.js", "OpenAI", "Vercel Blob", "Rate limiting"],
-    question: "What does this interactive profile project demonstrate?",
-  },
-  {
     name: "HardHat",
     href: "https://github.com/estifanosk/hardhat",
     summary:
