@@ -10,9 +10,44 @@ interface Message {
 
 const suggestedQuestions = [
   "What kind of backend work has Estifanos done?",
-  "Which projects show his data engineering experience?",
+  "Which personal projects best show how Estifanos builds?",
   "Where would he be strongest on a team?",
-  "What is he currently learning or building?",
+  "Tell me about Genzeb and AlgoLens.",
+];
+
+const personalProjects = [
+  {
+    name: "Genzeb",
+    href: "https://github.com/estifanosk/genzeb",
+    summary:
+      "Local-first desktop expense tracker with plain CSV storage, receipt workflows, categorization, and optional AI/MCP integrations.",
+    tags: ["Electron", "React", "TypeScript", "Local-first", "MCP"],
+    question: "What does Genzeb show about Estifanos's engineering style?",
+  },
+  {
+    name: "AlgoLens",
+    href: "https://github.com/estifanosk/algolens",
+    summary:
+      "Visual coding interview companion for algorithm patterns, walkthroughs, guided hints, and practice flows.",
+    tags: ["Next.js", "TypeScript", "Learning tools", "Visualization"],
+    question: "How does AlgoLens demonstrate product and frontend thinking?",
+  },
+  {
+    name: "Interactive Profile",
+    href: "https://github.com/estifanosk/interactive-profile",
+    summary:
+      "This AI-backed career profile, built as a practical experiment in grounded resume Q&A, content retrieval, and deployment.",
+    tags: ["Next.js", "OpenAI", "Vercel Blob", "Rate limiting"],
+    question: "What does this interactive profile project demonstrate?",
+  },
+  {
+    name: "HardHat",
+    href: "https://github.com/estifanosk/hardhat",
+    summary:
+      "QR-based construction compliance prototype for worker certifications, equipment readiness, daily inspections, and JHA sign-off.",
+    tags: ["Next.js", "Supabase", "Compliance", "Workflow design"],
+    question: "What kind of product problem does HardHat explore?",
+  },
 ];
 
 export default function Home() {
@@ -195,19 +230,81 @@ Try one of the starter questions below or ask directly.`,
             </div>
           ))}
           {messages.length === 1 && (
-            <div className="grid gap-2 sm:grid-cols-2">
-              {suggestedQuestions.map((question) => (
-                <button
-                  key={question}
-                  type="button"
-                  onClick={() => sendMessage(question)}
-                  className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-left text-sm leading-relaxed text-slate-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:focus:ring-blue-900"
-                  disabled={isLoading}
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
+            <>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {suggestedQuestions.map((question) => (
+                  <button
+                    key={question}
+                    type="button"
+                    onClick={() => sendMessage(question)}
+                    className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-left text-sm leading-relaxed text-slate-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:focus:ring-blue-900"
+                    disabled={isLoading}
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+
+              <section aria-labelledby="personal-projects" className="space-y-3">
+                <div>
+                  <h2
+                    id="personal-projects"
+                    className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+                  >
+                    Personal projects
+                  </h2>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    Side projects Estifanos uses to explore product ideas, AI-assisted workflows,
+                    and practical engineering tradeoffs.
+                  </p>
+                </div>
+
+                <div className="grid gap-3">
+                  {personalProjects.map((project) => (
+                    <article
+                      key={project.name}
+                      className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+                    >
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                            <a
+                              href={project.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="underline-offset-4 hover:underline"
+                            >
+                              {project.name}
+                            </a>
+                          </h3>
+                          <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                            {project.summary}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => sendMessage(project.question)}
+                          className="shrink-0 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:focus:ring-blue-900"
+                          disabled={isLoading}
+                        >
+                          Ask
+                        </button>
+                      </div>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            </>
           )}
           {isLoading && messages[messages.length - 1]?.role === "user" && (
             <div className="flex justify-start">
